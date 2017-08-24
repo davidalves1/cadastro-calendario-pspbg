@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Paróquia São Pedro de Baixo Guandu</title>
+	<link rel="stylesheet" href="node_modules/normalize.css/normalize.css">
+	<link rel="stylesheet" href="node_modules/milligram/dist/milligram.min.css">
+	<style>
+		.mtop-2 {
+			margin-top: 2rem;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<form>
+				<div class="column mtop-2">
+					<h1>Cadastrar</h1>
+					<label for="date">Data e hora</label>
+					<input type="text" id="date">
+					
+					<label for="description">Descrição</label>
+					<input type="text" id="description">
+					
+					<button id="enviar">Enviar</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	<script>
+		const enviar = document.querySelector('#enviar');
+
+		document.addEventListener('click', () => {
+			fetch()
+		});
+
+		function getEvents(date) {
+			const config = {
+				method: 'get',
+				mode: 'cors',
+				header: new Headers({'Content-Type': 'application/json'})
+			}
+
+			fetch(`http://api-pspbg.azurewebsites.net/v1/events/${date}`, config)
+			.then(response => response.json())
+			.then(events => showEvents(events, date))
+			.catch(err => noEvents());
+		}
+	</script>
+</body>
+</html>
